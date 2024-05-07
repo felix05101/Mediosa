@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mediosa</title>
+<link rel="icon" type="image/png" href="https://i.ibb.co/tMF4m8w/music.png">
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: "Roboto", sans-serif;
+    overflow: hidden;
+	height: 100vh;
+	background: rgb(131, 58, 180);
+	background: -moz-linear-gradient(180deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+	background: -webkit-linear-gradient(180deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+	background: linear-gradient(180deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4", endColorstr="#fcb045", GradientType=1);
+}
+
+
+.container {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 600px;
+	width: 400px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+#urlInput {
+	margin-top: 30px;
+	width: 80%;
+	text-align: center;
+	border: 2px solid #fff;
+	/* Changed border style */
+	border-radius: 8px;
+	/* Increased border-radius for smoother edges */
+	height: px;
+	/* Increased height for better visibility */
+	background-color: rgba(255, 255, 255, 0.5);
+	/* Semi-transparent background */
+	color: #333;
+	/* Changed text color */
+	font-size: 16px;
+	/* Adjusted font size */
+	padding: 8px;
+	/* Added padding for better spacing */
+	transition: border-color 0.3s ease, background-color 0.3s ease;
+	/* Added transition effect */
+}
+
+#urlInput:focus {
+	outline: none;
+	/* Remove default focus outline */
+	border-color: #BB2C6C;
+	/* Changed border color on focus */
+	background-color: rgba(255, 255, 255, 0.7);
+	/* Lighter background on focus */
+}
+
+
+button {
+    text-align: center;
+	background-color: #252525;
+	border-style: none;
+	color: rgb(255, 255, 255);
+	border-radius: 8px;
+	text-align: center;
+	width: 60px;
+	height: 60px;
+}
+
+#sendRequest {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+}
+
+#sendRequest2 {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-160%, -50%);
+
+}
+
+#sendRequest3 {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(60%, -50%);
+
+}
+
+#sendRequest4 {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -160%);
+
+}
+
+#sendRequest5 {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 60%);
+}
+
+#logo {
+	width: 80px;
+	margin: 0;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.footer {
+    margin: 0;
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.main {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 960px;
+	width: 400px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="main">
+	<image id="logo" src="https://i.ibb.co/tMF4m8w/music.png"></image>
+    <div class="container">
+      <input type="text" id="urlInput" autocomplete="off" placeholder="Enter IP">
+      <button id="sendRequest">Pause</button>
+      <button id="sendRequest2">Prev</button>
+      <button id="sendRequest3">Next</button>
+      <button id="sendRequest4">Volume +</button>
+      <button id="sendRequest5">Volume -</button>
+    </div>
+<div class="footer">
+    <text>Made by Floppa ❤</text>
+</div>
+</div>
+
+    
+    <script>
+      document.getElementById("sendRequest").addEventListener("click", function() {
+        sendRequest("/function1");
+      });
+    
+      document.getElementById("sendRequest2").addEventListener("click", function() {
+        sendRequest("/function2");
+      });
+    
+      document.getElementById("sendRequest3").addEventListener("click", function() {
+        sendRequest("/function3");
+      });
+
+      document.getElementById("sendRequest4").addEventListener("click", function() {
+        sendRequest("/function4");
+      });
+
+      document.getElementById("sendRequest5").addEventListener("click", function() {
+        sendRequest("/function5");
+      });
+    
+      function sendRequest(endpoint) {
+        var url = "http://" + document.getElementById("urlInput").value + ":54783" + endpoint;
+    
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+          }
+        };
+        xhr.send();
+      }
+    </script>
+    
+</body>
+</html>
